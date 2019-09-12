@@ -1,0 +1,51 @@
+type GenericScript {
+  miniscript: Miniscript
+  script: Script
+}
+
+type Miniscript {
+  script: String!
+  size: Int
+  maxSatisfactionWitnessElements: Int
+  maxSatisfactionSize: Int
+  semantic: Semantic
+}
+
+enum PublicKeyEnum {
+  STRING
+  PUBLIC_KEY
+  DUMMY_KEY
+}
+
+type Query {
+  policy(script: String!, pkType: PublicKeyEnum!): GenericScript
+  miniscript(script: String!, pkType: PublicKeyEnum!): GenericScript
+}
+
+type Script {
+  script: String
+  length: Int
+  isEmpty: Boolean
+  toBytes: [Int]
+  toP2SH: Boolean
+  toV0P2WSH: Boolean
+  isP2SH: Boolean
+  isP2PKH: Boolean
+  isP2PK: Boolean
+  isWitnessProgram: Boolean
+  isV0P2WSH: Boolean
+  isV0P2WPKH: Boolean
+  isOPRETURN: Boolean
+  isProvablyUnspendable: Boolean
+}
+
+type Semantic {
+  normalized: String
+  isTrivial: Boolean
+  isUnsatisfiable: Boolean
+  relativeTimelocks: [Int]
+  atAge: String
+  nKeys: Int
+  minimumNKeys: Int
+  sorted: String
+}
